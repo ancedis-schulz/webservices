@@ -1,0 +1,353 @@
+@CHARSET "UTF-8";
+
+html, body {
+	display: block;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+}
+
+div{
+	margin: 0;
+	padding: 0;
+}
+
+ul{
+	list-style-type:none;
+}
+
+a{
+	color: #000000;
+	text-decoration: none;
+}
+
+input[type=submit]{
+	background: #2A3E54;
+	border: none;
+	clear: both;
+	color: white;
+	cursor: pointer;
+	display: block;
+	float: right;
+	padding: 10px 5px;
+	margin: 5px 0;
+}
+
+.resultString{
+	float: left;
+	width: 100%;
+}
+
+div.verticalContainer{
+	display: block;
+	height: 100%;
+	text-align: center;
+	vertical-align: middle;
+}
+
+#menueContainer ul li{
+	margin: 10px 0;
+}
+
+#menueContainer #projectsHeadline{
+	font-weight: bold;
+}
+
+div#wrapper{
+	background-color: #2A3F54;
+	color: #FFF;
+	display: inline-block;
+	margin-top: 18%;
+	text-align: left;
+	width: 25%;
+}
+
+#wrapper h1, #wrapper h2, #wrapper h3{
+	margin: 5px;
+	padding: 16px;
+}
+
+#wrapper > #loginForm{
+	border-top: 2px solid #FFF;
+	float: left;
+	padding: 16px;
+	width: 93%;
+}
+
+#wrapper > #errorMessage{
+	border-top: 2px solid #FFF;
+	float: left;
+	padding: 16px;
+	width: 93%;
+}
+
+#wrapper #loginForm #formButtonPane{
+	float: left;
+	margin: 8px 0px;
+	width: 100%;
+}
+
+#wrapper #loginForm > input{
+	float: right;
+	margin: 8px 0px;
+	padding: 5px;
+	width: 50%;
+}
+
+#wrapper #loginForm > .label{
+	clear: left;
+	float: left;
+	margin: 12px 5px;
+	width: 40%;
+}
+
+#wrapper #loginForm #formButtonPane input{
+	background-color: #FFF;
+	border: none;
+	color: #2A3F54;
+	float: right;
+	padding: 5px 10px;
+}
+
+.content{
+	height: 100%;
+	width: 100%;
+}
+
+.container{
+	display: inline-table;
+	padding: 20px 10px;
+	width: 47.2%;
+	height: 100%;
+}
+
+.container.double{
+	display: inline-grid;
+	padding: 20px 10px;
+	width: 95%;
+}
+
+.content .header{
+	border-bottom: 2px solid #2A3E54; 
+	height: 15%;
+	width: 100%;
+}
+
+.content .header .user{
+	background: #1A3E54;
+	color: #FFFFFF;
+	float: left;
+	height: 100%;
+	width: 20%;
+}
+
+.content .header .user .container.double{
+	display: block;
+}
+
+.content .header #actualPage{
+	float: left;
+	height: 100%;
+	width: 80%;
+}
+
+.content .header .user h1, .content .header .user span{
+	width: 100%;
+}
+
+.content .navigation{
+	border-right: 2px solid #2A3E54;
+	float: left; 	 
+	height: 84.8%;
+	width: 19.9%;;
+}
+
+.content .contentForm{
+	display: block;
+	float: left; 	 
+	height: 84.8%;
+	width: 79.9%;;
+	overflow-y: scroll;
+}
+
+.content .contentForm .block{
+	background: #EEE;
+	display: block;
+	float: left; 
+	padding: 5px 10px 25px;
+}
+
+#userRow{
+	height: 330px;
+}
+
+#changePassword, #addUser{
+	height: 100%;
+	width: 95%;
+}
+
+#changePassword form, #addUser form{
+	padding: 10px;
+}
+
+#changePassword form label, #addUser form label{
+	clear: left;
+	display: block;
+	float: left;
+	margin: 9px 0;
+	width: 40%;
+}
+
+#changePassword form input[type=password], #addUser form input[type=password], #addUser form input[type=text]{
+	clear: right;
+	display: block;
+	float: right;
+	margin: 5px 0;
+	padding: 5px;
+	width: 40%;
+}
+
+#changePassword form input[type=submit], #addUser form input[type=submit]{
+	background: #2A3E54;
+	border: none;
+	clear: both;
+	color: white;
+	display: block;
+	float: right;
+	margin: 15px 0;
+	padding: 10px 20px;
+}
+
+.table{
+	background: #FFFFFF;
+	height: 100%;
+	min-height: 200px;
+	margin: 0 auto;
+	width: 95%;
+}
+
+#addProject label{
+	display: block;
+	float: left;
+	margin-top: 3px;
+	width: 45%;
+}
+
+#addProject input[type=text]{
+	display: block;
+	float: right;
+	padding: 5px;
+	width: 45%;
+}
+
+#addFile label{
+	display: block;
+	float: left;
+	margin: 5px 0;
+	width: 45%;
+}
+
+#addFile input[type=file]{
+	display: block;
+	float: right;
+	padding: 5px;
+	width: 45%;
+}
+
+#searchList label{
+	display: block;
+	float: left;
+	margin: 10px 0;
+	width: 45%;
+}
+
+#searchList input[type=text]{
+	display: block;
+	float: right;
+	padding: 5px;
+	margin: 5px 0;
+	width: 45%;
+}
+
+#addFile form{
+	width: 100%;
+	height: 70%;
+}
+
+#addFile form .half{
+	float: left;
+	height: 100%;
+	width: 50%;
+}
+
+#projectDescription .inlineContainer{
+	display: block;
+	float: left;
+	height: 100%;
+	width: 100%;
+}
+
+#projectDescription h2{
+	display: block;
+	float: left;
+	width: 100%;
+}
+
+#projectDescription form{
+	display: block;
+	float: left;
+	height: 36%;
+	width: 100%;
+}
+
+#projectDescription textarea{
+	height: 75%;
+	width: 98%;
+}
+
+#projectList input[type=submit], #projectUserList input[type=submit]{
+	clear: none;
+	margin: 10px;
+}
+
+#addMetaFile label{
+	float: left;
+	width: 45%; 
+}
+
+#addMetaFile input[type=file]{
+	float: left;
+	width: 55%; 
+}
+
+#fileDescription label{
+	float: left;
+	width: 100%; 
+}
+
+#fileDescription textarea{
+	float: left;
+	min-height: 200px;
+	width: 99.6%; 
+}
+
+#descriptorList #add{
+	float: left;
+	margin: 5px 0;
+	width: 100%; 
+}
+
+#descriptorList #add label{
+	float: left;
+	width: 45%;
+}
+
+#descriptorList #add input[type=text]{
+	float: left;
+	width: 54.7%;
+}
+
+#userGroupRow input{
+	float: right;
+}

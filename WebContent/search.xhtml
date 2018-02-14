@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>#{msg.searchTitle}</title>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</h:head>
+	<f:event listener="#{search.init()}" type="preRenderView"></f:event>
+	<body>
+		<div class="content">
+			<div class="header">
+				<div class="user">
+					<div class="container double">
+						<h1>#{msg.loggedAs}</h1>
+						<span class="username">#{search.username}</span>
+					</div>
+				</div>
+				<div id="actualPage">
+					<div class="container">
+						<h1>#{msg.searchTitle}</h1>
+					</div>
+				</div>
+			</div>
+			<div class="navigation">
+				<div class="container">
+					<h1>#{msg.navigationTitle}</h1>
+					<div id="menueContainer">
+						<ul>
+							<li>
+								<h:outputLink value="profile.xhtml">
+									<h:outputText value="#{msg.profileTitle}" />
+								</h:outputLink>
+							</li>
+							<li>
+								<h:outputLink value="search.xhtml">
+									<h:outputText value="#{msg.searchTitle}" />
+								</h:outputLink>
+							</li>
+							<li>
+								<h:outputText value="#{msg.menueProjectHeadline}" id="projectsHeadline" />
+								<ul id="projects">
+									<li>
+										<h:outputLink value="projects.xhtml">
+											<h:outputText value="#{msg.menueAddProject}" />
+										</h:outputLink>
+									</li>
+									<h:form>
+										<ui:repeat var="entry" value="#{search.listOfProjects}" varStatus="status">
+											<li>
+												<h:commandLink action="#{search.openProject(entry)}">
+													<h:outputText value="#{entry.mProjectName}" />
+												</h:commandLink>
+											</li>
+										</ui:repeat>
+									</h:form>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="contentForm">
+				<div class="row">
+					<div class="container double">
+						<div id="searchList" class="block">
+							<div class="inlineContainer">
+								<h2>#{msg.searchTitle}</h2>
+								<h:form>
+									<h:outputLabel value="#{msg.searchDescriptor}" for="searchDescriptor" />
+									<h:inputText value="#{search.descriptor}" id="searchDescriptor" name="searchDescriptor" />
+									<h:outputLabel value="#{msg.searchUser}" for="searchUser" />
+									<h:inputText value="#{search.userName}" id="searchUser" name="searchUser" />
+									<h:outputLabel value="#{msg.searchProject}" for="searchProject" />
+									<h:inputText value="#{search.projectName}" id="searchProject" name="searchProject" />
+									<h:commandButton action="#{search.search()}" type="submit" value="#{msg.search}" />
+								</h:form>
+							</div>
+						</div>
+					</div>
+				</div>			
+				<div class="row">
+					<div class="container double">
+						<div id="searchResultList" class="block">
+							<div class="inlineContainer">
+								<h2>#{msg.searchResultList}</h2>
+								<h:form>
+									<h:selectOneListbox id="descriptorList" class="table" value="#{search.selectedValue}">
+										<f:selectItems value="#{search.searchValues}" />
+									</h:selectOneListbox>
+									<h:commandButton action="#{search.openFile()}" type="submit" value="#{msg.searchOpenFile}" />
+								</h:form>
+							</div>
+						</div>
+					</div>
+				</div>			
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>#{msg.loginTitle}</title>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</h:head>
+	<body>
+		<div class="verticalContainer">
+			<div id="wrapper">
+				<h3>#{msg.loginText}</h3>
+				<h:form id="loginForm">
+					<h:outputLabel value="#{msg.username}" class="label" for="loginUsername" />
+					<h:inputText value="#{login.username}" id="loginUsername" name="username" />
+					<h:outputLabel value="#{msg.password}" class="label" for="loginPassword" />
+					<h:inputSecret value="#{login.password}" id="loginPassword" name="password" validatorMessage="#{msg.passwordLengthError}">
+						<f:validateLength minimum="4"/>
+					</h:inputSecret>
+					<div id="formButtonPane">
+						<h:commandButton type="submit" action="#{login.checkLogin()}" value="#{msg.loginButton}" />
+						<h:commandButton type="submit" action="#{login.createAccount()}" value="#{msg.loginCreate}" />
+					</div>
+				</h:form>
+				<div id="errorMessage">
+					<h:message for="loginPassword"/>
+					<h:outputText value="#{login.loginResult}"/>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

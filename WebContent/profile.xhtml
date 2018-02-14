@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>#{msg.profileTitle}</title>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</h:head>
+	<f:event listener="#{profile.init()}" type="preRenderView"></f:event>
+	<body>
+		<div class="content">
+			<div class="header">
+				<div class="user">
+					<div class="container double">
+						<h1>#{msg.loggedAs}</h1>
+						<span class="username">#{profile.username}</span>
+					</div>
+				</div>
+				<div id="actualPage">
+					<div class="container">
+						<h1>#{msg.profileTitle}</h1>
+					</div>
+				</div>
+			</div>
+			<div class="navigation">
+				<div class="container">
+					<h1>#{msg.navigationTitle}</h1>
+					<div id="menueContainer">
+						<ul>
+							<li>
+								<h:outputLink value="profile.xhtml">
+									<h:outputText value="#{msg.profileTitle}" />
+								</h:outputLink>
+							</li>
+							<li>
+								<h:outputLink value="search.xhtml">
+									<h:outputText value="#{msg.searchTitle}" />
+								</h:outputLink>
+							</li>
+							<li>
+								<h:outputText value="#{msg.menueProjectHeadline}" id="projectsHeadline" />
+								<ul id="projects">
+									<li>
+										<h:outputLink value="projects.xhtml">
+											<h:outputText value="#{msg.menueAddProject}" />
+										</h:outputLink>
+									</li>
+									<h:form>
+										<ui:repeat var="entry" value="#{profile.listOfProjects}" varStatus="status">
+											<li>
+												<h:commandLink action="#{profile.openProject(entry)}">
+													<h:outputText value="#{entry.mProjectName}" />
+												</h:commandLink>
+											</li>
+										</ui:repeat>
+									</h:form>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="contentForm">
+				<div id="userRow" class="row">
+					<div class="container">
+						<div id="changePassword" class="block">
+							<div class="inlineContainer">
+								<h2>#{msg.changePassword}</h2>
+								<h:form>
+									<h:outputLabel value="#{msg.newPassword}" for="newPassword" />
+									<h:inputSecret value="#{profile.password}" id="newPassword" name="password">
+										<f:validateLength minimum="4"/>
+									</h:inputSecret>
+									<h:outputLabel value="#{msg.repeatNewPassword}" for="rptNewPassword" />
+									<h:inputSecret value="#{profile.rptPassword}" id="rptNewPassword" name="rptPassword">
+										<f:validateLength minimum="4"/>
+									</h:inputSecret>
+									<h:commandButton type="submit" value="#{msg.changePassword}" action="#{profile.changePassword()}" />
+								</h:form>
+								<h:outputText class="resultString" value="#{profile.passwordChangeResult}" />
+							</div>
+						</div>
+					</div>
+					<div class="container">
+						<div id="addUser" class="block">
+							<div class="inlineContainer">
+								<h2>#{msg.addUser}</h2>
+								<h:form>
+									<h:outputLabel value="#{msg.username}" for="newUsername" />
+									<h:inputText value="#{profile.newUsername}" id="newUsername" name="username" />
+									<h:outputLabel value="#{msg.password}" for="addNewUserPassword" />
+									<h:inputSecret value="#{profile.newPassword}" id="addNewUserPassword" name="password">
+										<f:validateLength minimum="4"/>
+									</h:inputSecret>
+									<h:commandButton type="submit" action="#{profile.addUser()}" value="#{msg.addUser}" />
+								</h:form>
+								<h:outputText class="resultString" value="#{profile.addUserResult}" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="userGroupRow" class="row">
+					<div class="container">
+						<div id="changePassword" class="block">
+							<div class="inlineContainer">
+								<h2>#{msg.newUserGroup}</h2>
+								<h:form>
+									<h:outputLabel value="#{msg.newUserGroupName}" for="newUserGroupName" />
+									<h:inputText value="#{profile.newUserGroupName}" id="newUserGroupName" name="newUserGroupName" />
+									<h:outputLabel value="#{msg.newUserRight}" for="newUserRight" />
+									<h:selectBooleanCheckbox value="#{profile.newUserRight}" id="newUserRight" name="newUserRight" />
+									<h:outputLabel value="#{msg.newFileRight}" for="newFileRight" />
+									<h:selectBooleanCheckbox value="#{profile.newFileRight}" id="newFileRight" name="newFileRight" />
+									<h:outputLabel value="#{msg.newFileRight}" for="newFilerRight" />
+									<h:selectBooleanCheckbox value="#{profile.newProjectRight}" id="newProjectRight" name="newProjectRight" />
+									<h:commandButton type="submit" value="#{msg.saveUserGroup}" action="#{profile.saveUserGroup()}" />
+								</h:form>
+								<h:outputText class="resultString" value="#{profile.addUserResult}" />
+							</div>
+						</div>
+					</div>
+					<div class="container">
+						<div id="addUser" class="block">
+							<div class="inlineContainer">
+								<h2>#{msg.availableUserGroups}</h2>
+								<h:form>
+									<h:selectOneListbox class="table" value="#{profile.selectedUserGroup}">
+										<f:selectItems value="#{profile.userGroups}"/>
+									</h:selectOneListbox>
+									<h:commandButton action="#{profile.deleteUserGroup()}" value="#{msg.deleteUserGroups}" />
+								</h:form>
+								<h:outputText class="resultString" value="#{profile.deleteUserGroupResult}" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="container double">
+						<div id="userList" class="block">
+							<div class="inlineContainer">
+								<h2>#{msg.userList}</h2>
+								<h:form>
+									<h:selectOneListbox class="table" value="#{profile.selectedUserId}">
+										<f:selectItems value="#{profile.userList}"/>
+									</h:selectOneListbox>
+									<h:commandButton action="#{profile.deleteUser()}" value="#{msg.deleteUser}" />
+								</h:form>
+								<h:outputText class="resultString" value="#{profile.deleteUserResult}" />
+							</div>
+						</div>
+					</div>
+				</div>			
+			</div>
+		</div>
+	</body>
+</html>

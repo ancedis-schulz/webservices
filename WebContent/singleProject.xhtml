@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>#{msg.title}</title>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</h:head>
+	<f:event listener="#{singleProject.init()}" type="preRenderView"></f:event>
+	<body>
+		<div class="content">
+			<div class="header">
+				<div class="user">
+					<div class="container double">
+						<h1>#{msg.loggedAs}</h1>
+						<span class="username">#{singleProject.username}</span>
+					</div>
+				</div>
+				<div id="actualPage">
+					<div class="container">
+						<h1>#{singleProject.projectName}</h1>
+					</div>
+				</div>
+			</div>
+			<div class="navigation">
+				<div class="container">
+					<h1>#{msg.navigationTitle}</h1>
+					<div id="menueContainer">
+						<ul>
+							<li>
+								<h:outputLink value="profile.xhtml">
+									<h:outputText value="#{msg.profileTitle}" />
+								</h:outputLink>
+							</li>
+							<li>
+								<h:outputLink value="search.xhtml">
+									<h:outputText value="#{msg.searchTitle}" />
+								</h:outputLink>
+							</li>
+							<li>
+								<h:outputText value="#{msg.menueProjectHeadline}" id="projectsHeadline" />
+								<ul id="projects">
+									<li>
+										<h:outputLink value="projects.xhtml">
+											<h:outputText value="#{msg.menueAddProject}" />
+										</h:outputLink>
+									</li>
+									<h:form>
+										<ui:repeat var="entry" value="#{singleProject.listOfProjects}" varStatus="status">
+											<li>
+												<h:commandLink action="#{singleProject.openProject(entry)}">
+													<h:outputText value="#{entry.mProjectName}" />
+												</h:commandLink>
+											</li>
+										</ui:repeat>
+									</h:form>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="contentForm">
+				<div class="row">
+					<div class="container double">
+						<div id="projectDescription" class="block">
+							<div class="inlineContainer">
+								<h2>#{msg.projectDescription}</h2>
+								<h:form>
+									<h:outputLabel value="#{msg.projectDescription}" for="projectDescription" />
+									<h:inputTextarea value="#{singleProject.projectDescription}" id="projectDescription" name="projectDescription" />
+									<h:commandButton action="#{singleProject.saveDescription()}" type="submit" value="#{msg.saveDescription}" />
+								</h:form>
+								<h:outputText class="resultString" value="#{projects.addProjectsResult}" />
+							</div>
+						</div>
+					</div>
+				</div>		
+				<div id="newProject" class="row">
+					<div class="container double">
+						<div id="addFile" class="block">
+							<div class="inlineContainer">
+								<h2>#{msg.addFile}</h2>
+								<h:form enctype="multipart/form-data">
+									<h:outputLabel value="#{msg.chooseFile}" for="addFile" />
+									<h:inputFile value="#{singleProject.newFile}" id="addFile" name="fileName" />
+									<h:commandButton action="#{singleProject.uploadFile()}" type="submit" value="#{msg.uploadFile}" />
+								</h:form>
+								<h:outputText class="resultString" value="#{singleProject.addFileResult	}" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="container double">
+						<div id="projectList" class="block">
+							<div class="inlineContainer">
+								<h2>#{msg.fileList}</h2>
+								<h:form>
+									<h:selectOneListbox class="table" value="#{singleProject.selectedFile}">
+										<f:selectItems value="#{singleProject.fileList}"/>
+									</h:selectOneListbox>
+									<h:commandButton action="#{singleProject.deleteFile()}" type="submit" value="#{msg.fileListDeleteFile}" />
+									<h:commandButton action="#{singleProject.openFile()}" type="submit" value="#{msg.fileListOpenFile}" />
+									<h:commandButton action="#{singleProject.downloadFile()}" type="submit" value="#{msg.fileListDownload}" />
+								</h:form>
+								<h:outputText class="resultString" value="#{singleProject.openFileResult}" />
+							</div>
+						</div>
+					</div>
+				</div>			
+				<div class="row">
+					<div class="container double">
+						<div id="projectUserList" class="block">
+							<div class="inlineContainer">
+								<h2>#{msg.userListAddUser}</h2>
+								<h:form>
+									<h:outputLabel value="#{msg.userListAvailableUsers}" for="selectNewUser" />
+									<h:selectOneListbox id="selectNewUser" class="selection" value="#{singleProject.selectedAvailableUser}">
+										<f:selectItems value="#{singleProject.availableUsers}" />
+									</h:selectOneListbox>
+									<h:outputLabel value="#{msg.userListAvailableGroups}" for="selectNewGroup" />
+									<h:selectOneListbox id="selectNewGroup" value="#{singleProject.selectedAvailableGroup}">
+										<f:selectItems value="#{singleProject.availableGroups}" />
+									</h:selectOneListbox>
+									<h:commandButton action="#{singleProject.addUserToProject()}" type="submit" value="#{msg.userListAddUser}" />
+								</h:form>
+								<h:outputText class="resultString" value="#{singleProject.addUserResult}" />
+								<h2>#{msg.userList}</h2>
+								<h:form>
+									<h:selectOneListbox class="table" value="#{singleProject.selectedUser}">
+										<f:selectItems value="#{singleProject.userList}" />
+									</h:selectOneListbox>
+									<h:commandButton action="#{singleProject.deleteUserFromProject()}" type="submit" value="#{msg.userListDeleteUser}" />
+								</h:form>
+								<h:outputText class="resultString" value="#{singleProject.removeUserResult}" />
+							</div>
+						</div>
+					</div>
+				</div>			
+					
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>#{msg.title}</title>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</h:head>
+	<f:event listener="#{singleFile.init()}" type="preRenderView"></f:event>
+	<body>
+		<div class="content">
+			<div class="header">
+				<div class="user">
+					<div class="container double">
+						<h1>#{msg.loggedAs}</h1>
+						<span class="username">#{singleFile.username}</span>
+					</div>
+				</div>
+				<div id="actualPage">
+					<div class="container">
+						<h1>#{singleFile.filename}</h1>
+					</div>
+				</div>
+			</div>
+			<div class="navigation">
+				<div class="container">
+					<h1>#{msg.navigationTitle}</h1>
+					<div id="menueContainer">
+						<ul>
+							<li>
+								<h:outputLink value="profile.xhtml">
+									<h:outputText value="#{msg.profileTitle}" />
+								</h:outputLink>
+							</li>
+							<li>
+								<h:outputLink value="search.xhtml">
+									<h:outputText value="#{msg.searchTitle}" />
+								</h:outputLink>
+							</li>
+							<li>
+								<h:outputText value="#{msg.menueProjectHeadline}" id="projectsHeadline" />
+								<ul id="projects">
+									<li>
+										<h:outputLink value="projects.xhtml">
+											<h:outputText value="#{msg.menueAddProject}" />
+										</h:outputLink>
+									</li>
+									<h:form>
+										<ui:repeat var="entry" value="#{singleProject.listOfProjects}" varStatus="status">
+											<li>
+												<h:commandLink action="#{singleProject.openProject(entry)}">
+													<h:outputText value="#{entry.mProjectName}" />
+												</h:commandLink>
+											</li>
+										</ui:repeat>
+									</h:form>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="contentForm">
+				<div class="row">
+					<div class="container double">
+						<div id="addMetaFile" class="block">
+							<div class="inlineContainer">
+								<h2>#{msg.uploadMetaFile}</h2>
+								<h:form enctype="multipart/form-data">
+									<h:outputLabel value="#{msg.metaFileName}" for="addMetaFile" />
+									<h:inputFile value="#{singleFile.metaFile}" id="addMetaFile" name="addMetaFile" />
+									<h:commandButton action="#{singleFile.uploadFile()}" type="submit" value="#{msg.uploadMetaFile}" />
+									<h:commandButton action="#{singleFile.downloadMetaFile()}" type="submit" value="#{msg.downloadMetaFile}" />
+									<h:outputText class="actualFilename" value="#{msg.actualMetaFilename}" />
+									<h:outputText class="actualFilename file" value="#{singleFile.metaFilename}" />
+								</h:form>
+								<h:outputText class="resultString" value="#{singleFile.metaFileResult}" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="container double">
+						<div id="fileDescription" class="block">
+							<div class="inlineContainer">
+								<h2>#{msg.fileDescription}</h2>
+								<h:form>
+									<h:outputLabel value="#{msg.fileDescription}" for="fileDescription" />
+									<h:inputTextarea value="#{singleFile.fileDescription}" id="fileDescription" name="fileDescription" />
+									<h:commandButton action="#{singleFile.saveFileDescription()}" type="submit" value="#{msg.saveFileDescription}" />
+								</h:form>
+								<h:outputText class="resultString" value="#{singleFile.descriptionResult}" />
+							</div>
+						</div>
+					</div>
+				</div>		
+				<div class="row">
+					<div class="container double">
+						<div id="descriptorList" class="block">
+							<div class="inlineContainer">
+								<h2>#{msg.listOfDescriptors}</h2>
+								<h:form>
+									<div id="add">
+										<h:outputLabel class="descriptorLabel" value="#{msg.newDescriptorLabel}" for="descriptorList" />
+										<h:inputText value="#{singleFile.newDescriptor}" id="addDescriptor" name="addDescriptor" />
+										<h:commandButton action="#{singleFile.addDescriptor()}" type="submit" value="#{msg.addDescriptor}" />
+									</div>
+									<h:outputLabel class="descriptorListLabel" value="#{msg.listOfDescriptors}" for="descriptorList" />
+									<h:selectOneListbox id="descriptorList" class="table" value="#{singleFile.selectedDescriptor}">
+										<f:selectItems value="#{singleFile.descriptorList}" />
+									</h:selectOneListbox>
+									<h:commandButton action="#{singleFile.deleteDescriptor()}" type="submit" value="#{msg.deleteDescriptor}" />
+								</h:form>
+								<h:outputText class="resultString" value="#{singleFile.descriptionResult}" />
+							</div>
+						</div>
+					</div>
+				</div>				
+			</div>
+		</div>
+	</body>
+</html>
